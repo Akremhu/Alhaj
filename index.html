@@ -14,7 +14,7 @@
         }
     </script>
     <style>
-        /* تنسيق الصور الحقيقية كخلفية مائية خلف النصوص */
+        /* تحسين وضوح الصور الخلفية */
         .watermark-bg {
             position: absolute;
             top: 0;
@@ -22,27 +22,33 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.1; /* شفافية عالية لضمان وضوح النص */
+            opacity: 0.45; /* تم زيادة الوضوح لتظهر التفاصيل */
             z-index: 0;
-            filter: grayscale(30%);
+            filter: contrast(110%);
             transition: 0.5s ease;
         }
         .dept-card:hover .watermark-bg {
-            opacity: 0.2;
+            opacity: 0.6;
             transform: scale(1.05);
-            filter: grayscale(0%);
         }
+        /* لضمان بقاء النص واضحاً فوق الصور الواضحة */
         .card-content {
             position: relative;
             z-index: 10;
+            background: rgba(255, 255, 255, 0.85); /* طبقة حماية للنص */
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(2px);
+        }
+        .dark .card-content {
+            background: rgba(30, 41, 59, 0.85);
         }
         .dept-card {
             position: relative;
             overflow: hidden;
-            background: white;
-        }
-        .dark .dept-card {
-            background: #1e293b;
+            min-height: 300px;
+            display: flex;
+            align-items: flex-end;
         }
     </style>
 </head>
@@ -58,176 +64,180 @@
         </a>
     </div>
 
-    <header class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md py-4 px-6 shadow-md sticky top-0 z-40 transition-colors">
-        <div class="max-w-7xl mx-auto flex justify-between items-center relative">
+    <header class="bg-white/95 dark:bg-slate-800/95 backdrop-blur-md py-4 px-6 shadow-md sticky top-0 z-40 transition-colors">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-4">
-                <img src="logo.jpg" alt="Logo" class="h-14 w-auto rounded-lg shadow-sm">
+                <img src="logo.jpg" alt="Logo" class="h-14 w-auto rounded-lg">
                 <div class="flex flex-col">
-                    <h1 class="text-primary dark:text-blue-400 text-xl md:text-2xl font-black leading-tight tracking-tighter">مستشفى ابن الحاج <span class="text-secondary">التخصصي</span></h1>
-                    <span class="text-[9px] md:text-[10px] font-bold tracking-[0.1em] text-slate-400 uppercase">Ibn Al-Hajj Specialized Hospital</span>
+                    <h1 class="text-primary dark:text-blue-400 text-xl md:text-2xl font-black leading-tight">مستشفى ابن الحاج <span class="text-secondary">التخصصي</span></h1>
+                    <span class="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase">Ibn Al-Hajj Specialized Hospital</span>
                 </div>
             </div>
-            <a href="https://wa.me/967782629622" class="bg-secondary text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-emerald-600 transition shadow-lg flex items-center gap-2">
-                <i class="fab fa-whatsapp text-lg"></i> <span class="hidden md:inline">حجز موعد</span>
+            <div class="hidden md:flex gap-6 text-sm font-bold">
+                <a href="#departments" class="hover:text-secondary">الأقسام</a>
+                <a href="#doctors" class="hover:text-secondary">الأطباء</a>
+                <a href="#booking" class="hover:text-secondary">الحجز</a>
+            </div>
+            <a href="https://wa.me/967782629622" class="bg-secondary text-white px-5 py-2 rounded-full font-bold text-sm shadow-lg flex items-center gap-2">
+                <i class="fab fa-whatsapp"></i> <span class="hidden md:inline">تواصل معنا</span>
             </a>
         </div>
     </header>
 
-    <section class="relative bg-primary dark:bg-blue-950 pt-20 pb-32 px-6 text-center text-white overflow-hidden">
+    <section class="relative bg-primary dark:bg-blue-950 pt-24 pb-40 px-6 text-center text-white overflow-hidden">
         <div class="relative z-10">
-            <h2 class="text-4xl font-black mb-6">رعاية تمس القلوب.. وتكنولوجيا تخدم العقول</h2>
+            <h2 class="text-4xl md:text-5xl font-black mb-6">رعاية طبية تليق بكم</h2>
             <p class="text-lg opacity-80 max-w-2xl mx-auto mb-10 leading-relaxed">
-                في قلب صنعاء - همدان، نلتزم بتقديم أعلى معايير الجودة الطبية تحت سقف واحد.
+                في قلب صنعاء - همدان، نجمع بين الخبرة الطبية وأحدث التقنيات لضمان سلامتكم.
             </p>
-            <div class="flex justify-center gap-4">
-                <a href="#departments" class="bg-white text-primary px-8 py-4 rounded-2xl font-bold shadow-xl hover:bg-slate-100 transition">الأقسام</a>
-                <a href="#med-tools" class="bg-secondary text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:bg-emerald-600 transition">أدوات ذكية</a>
-            </div>
         </div>
-    </section>
-
-    <section class="max-w-5xl mx-auto -mt-16 relative z-20 px-6">
-        <div class="dept-card p-10 rounded-[3rem] shadow-2xl text-center border border-slate-100 dark:border-slate-700">
-            <img src="hospital.jpg" class="watermark-bg" alt="">
-            <div class="card-content">
-                <i class="fas fa-hospital-symbol text-secondary text-4xl mb-4"></i>
-                <h3 class="text-2xl font-bold text-primary dark:text-blue-400 mb-4 font-black">لماذا ابن الحاج التخصصي؟</h3>
-                <p class="leading-loose opacity-70">
-                    منذ تأسيسنا، وضعنا نصب أعيننا أن نكون الوجهة الطبية الأولى في منطقة إبلاس بهمدان، نقدم تجربة استشفائية متكاملة تعتمد على نخبة من الأطباء وأحدث الأجهزة.
-                </p>
-            </div>
-        </div>
+        <div class="absolute bottom-0 left-0 w-full h-24 bg-slate-50 dark:bg-slate-900" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
     </section>
 
     <section id="departments" class="py-20 px-6">
-        <h2 class="text-3xl font-black text-center mb-16 underline decoration-secondary decoration-4 underline-offset-8">أقسامنا الطبية</h2>
+        <h2 class="text-3xl font-black text-center mb-16 underline decoration-secondary decoration-4 underline-offset-8">أقسامنا الطبية المتميزة</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             
-            <div class="dept-card p-8 rounded-[2rem] shadow-lg border border-slate-100 dark:border-slate-700">
-                <img src="optics.jpg" class="watermark-bg" alt="">
-                <div class="card-content">
-                    <i class="fas fa-eye text-3xl text-blue-500 mb-4"></i>
-                    <h4 class="font-bold text-xl mb-2">قسم البصريات والعيون</h4>
-                    <p class="text-sm opacity-60">فحص النظر بأحدث الكمبيوترات وتوفير كافة أنواع العدسات.</p>
+            <div class="dept-card rounded-3xl shadow-xl">
+                <img src="optics.jpg" class="watermark-bg" alt="البصريات">
+                <div class="card-content w-full m-4">
+                    <h4 class="font-bold text-xl text-primary dark:text-blue-400">قسم البصريات والعيون</h4>
+                    <p class="text-xs mt-2">فحص النظر بأحدث الأجهزة وتجهيز النظارات.</p>
                 </div>
             </div>
 
-            <div class="dept-card p-8 rounded-[2rem] shadow-lg border border-slate-100 dark:border-slate-700">
-                <img src="heart.jpg" class="watermark-bg" alt="">
-                <div class="card-content">
-                    <i class="fas fa-heartbeat text-3xl text-red-500 mb-4"></i>
-                    <h4 class="font-bold text-xl mb-2">عيادة القلب والباطنية</h4>
-                    <p class="text-sm opacity-60">تشخيص دقيق لأمراض القلب والسكري بأحدث التقنيات.</p>
+            <div class="dept-card rounded-3xl shadow-xl">
+                <img src="heart.jpg" class="watermark-bg" alt="القلب">
+                <div class="card-content w-full m-4">
+                    <h4 class="font-bold text-xl text-red-600">عيادة القلب والباطنية</h4>
+                    <p class="text-xs mt-2">رعاية متكاملة لمرضى القلب والسكري.</p>
                 </div>
             </div>
 
-            <div class="dept-card p-8 rounded-[2rem] shadow-lg border border-slate-100 dark:border-slate-700">
-                <img src="maternity.jpg" class="watermark-bg" alt="">
-                <div class="card-content">
-                    <i class="fas fa-baby-carriage text-3xl text-emerald-500 mb-4"></i>
-                    <h4 class="font-bold text-xl mb-2">قسم الأمومة والطفولة</h4>
-                    <p class="text-sm opacity-60">رعاية شاملة للحوامل وولادة طبيعية وقيصرية آمنة.</p>
-                </div>
-            </div>
-
-            <div class="dept-card p-8 rounded-[2rem] shadow-lg border border-slate-100 dark:border-slate-700">
-                <img src="lab.jpg" class="watermark-bg" alt="">
-                <div class="card-content">
-                    <i class="fas fa-vial text-3xl text-purple-500 mb-4"></i>
-                    <h4 class="font-bold text-xl mb-2">المختبر المركزي</h4>
-                    <p class="text-sm opacity-60">نتائج دقيقة وسريعة لكافة الفحوصات بأجهزة آلية حديثة.</p>
-                </div>
-            </div>
-
-            <div class="dept-card p-8 rounded-[2rem] shadow-lg border border-slate-100 dark:border-slate-700">
-                <img src="surgery.jpg" class="watermark-bg" alt="">
-                <div class="card-content">
-                    <i class="fas fa-user-md text-3xl text-orange-500 mb-4"></i>
-                    <h4 class="font-bold text-xl mb-2">الجراحة العامة والمسالك</h4>
-                    <p class="text-sm opacity-60">عمليات جراحية دقيقة وتفتيت الحصوات بالليزر والمناظير.</p>
-                </div>
-            </div>
-
-            <div class="dept-card p-8 rounded-[2rem] shadow-lg border border-slate-100 dark:border-slate-700">
-                <img src="xray.jpg" class="watermark-bg" alt="">
-                <div class="card-content">
-                    <i class="fas fa-x-ray text-3xl text-slate-500 mb-4"></i>
-                    <h4 class="font-bold text-xl mb-2">الأشعة الرقمية</h4>
-                    <p class="text-sm opacity-60">تصوير تلفزيوني (Ultrasound) وأشعة سينية متطورة.</p>
+            <div class="dept-card rounded-3xl shadow-xl">
+                <img src="maternity.jpg" class="watermark-bg" alt="الأمومة">
+                <div class="card-content w-full m-4">
+                    <h4 class="font-bold text-xl text-emerald-600">قسم الأمومة والطفولة</h4>
+                    <p class="text-xs mt-2">رعاية خاصة للأم والجنين وغرف ولادة حديثة.</p>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <section class="py-20 bg-primary/5 dark:bg-blue-950/20 px-6">
+    <section id="doctors" class="py-20 bg-white dark:bg-slate-800/50 px-6">
         <h2 class="text-3xl font-black text-center mb-16">نخبة الكوادر الطبية</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             
-            <div class="doc-item bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
-                <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-secondary mb-4">
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center border-b-4 border-secondary">
+                <div class="w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-slate-100 mb-4">
+                    <img src="dr_ahmed.jpg" class="w-full h-full object-cover" alt="د. أحمد الخضيري">
+                </div>
+                <h4 class="font-bold">د. أحمد الخضيري</h4>
+                <p class="text-secondary text-xs font-bold">أخصائي الجراحة العامة</p>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
+                <div class="w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-slate-100 mb-4">
                     <img src="dr_amany.jpg" class="w-full h-full object-cover" alt="د. أماني">
                 </div>
-                <h4 class="font-bold text-lg">د. أماني بن حفيظ</h4>
-                <p class="text-secondary font-bold text-xs uppercase">أخصائية باطنة وقلب</p>
+                <h4 class="font-bold">د. أماني بن حفيظ</h4>
+                <p class="text-secondary text-xs font-bold">أخصائية باطنة وقلب</p>
             </div>
 
-            <div class="doc-item bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
-                <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-secondary mb-4">
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
+                <div class="w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-slate-100 mb-4">
                     <img src="dr_zain.jpg" class="w-full h-full object-cover" alt="د. زين">
                 </div>
-                <h4 class="font-bold text-lg">د. زين العابدين جروش</h4>
-                <p class="text-secondary font-bold text-xs uppercase">أخصائي مسالك بولية</p>
+                <h4 class="font-bold">د. زين العابدين جروش</h4>
+                <p class="text-secondary text-xs font-bold">أخصائي مسالك بولية</p>
             </div>
 
-            <div class="doc-item bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
-                <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-secondary mb-4">
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
+                <div class="w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-slate-100 mb-4">
                     <img src="dr_marwa.jpg" class="w-full h-full object-cover" alt="د. مروى">
                 </div>
-                <h4 class="font-bold text-lg">د. مروى الأصبحي</h4>
-                <p class="text-secondary font-bold text-xs uppercase">أخصائية نساء وولادة</p>
+                <h4 class="font-bold">د. مروى الأصبحي</h4>
+                <p class="text-secondary text-xs font-bold">أخصائية نساء وولادة</p>
             </div>
 
         </div>
     </section>
 
-    <section id="med-tools" class="py-20 px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            <div class="dept-card p-10 rounded-[2.5rem] shadow-xl border-t-4 border-primary">
-                <img src="bmi_bg.jpg" class="watermark-bg" alt="">
-                <div class="card-content">
-                    <h3 class="font-black text-xl mb-6 text-primary dark:text-blue-300">حاسبة كتلة الجسم (BMI)</h3>
-                    <div class="space-y-4">
-                        <input type="number" id="weight" placeholder="الوزن (كجم)" class="modern-input">
-                        <input type="number" id="height" placeholder="الطول (سم)" class="modern-input">
-                        <button onclick="calculateBMI()" class="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-lg">تحليل الوزن</button>
-                        <div id="bmi-result" class="hidden mt-4 p-4 rounded-xl text-center font-bold"></div>
+    <section id="booking" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+            
+            <div class="space-y-8">
+                <h2 class="text-3xl font-black">أين تجدوننا؟</h2>
+                <div class="bg-primary/5 p-8 rounded-[2rem] border-r-8 border-primary space-y-6">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-map-marker-alt text-2xl text-red-500 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-xl">العنوان</h4>
+                            <p class="opacity-70 text-lg">صنعاء - همدان - إبلاس (الشارع العام)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-phone-alt text-2xl text-secondary mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-xl">أرقام التواصل</h4>
+                            <p class="opacity-70 text-lg">782629622</p>
+                            <p class="opacity-70 text-lg">01-XXXXXXX</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-clock text-2xl text-blue-500 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-xl">ساعات العمل</h4>
+                            <p class="opacity-70">نستقبلكم على مدار 24 ساعة (طوارئ)</p>
+                            <p class="opacity-70">العيادات: 8:00 صباحاً - 8:00 مساءً</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="dept-card p-10 rounded-[2.5rem] shadow-xl border-t-4 border-pink-400">
-                <img src="baby_bg.jpg" class="watermark-bg" alt="">
-                <div class="card-content">
-                    <h3 class="font-black text-xl mb-6 text-pink-600">موعد الولادة المتوقع</h3>
-                    <div class="space-y-4">
-                        <p class="text-xs opacity-50">تاريخ أول يوم لآخر دورة شهرية:</p>
-                        <input type="date" id="lmp-date" class="modern-input">
-                        <button onclick="calculateDueDate()" class="w-full bg-pink-500 text-white py-4 rounded-xl font-bold shadow-lg">تحديد الموعد</button>
-                        <div id="due-result" class="hidden mt-4 p-4 rounded-xl text-center font-bold text-pink-600 bg-pink-50"></div>
+            <div class="bg-white dark:bg-slate-800 p-10 rounded-[3rem] shadow-2xl">
+                <h3 class="text-2xl font-black mb-8 text-center">حجز موعد إلكتروني</h3>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold mb-2">اسم المريض الكامل</label>
+                        <input type="text" placeholder="أدخل اسمك هنا" class="w-full p-4 rounded-2xl border-2 border-slate-100 dark:border-slate-700 dark:bg-slate-900 outline-none focus:border-secondary transition-all">
                     </div>
-                </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2">العيادة المطلوبة</label>
+                        <select class="w-full p-4 rounded-2xl border-2 border-slate-100 dark:border-slate-700 dark:bg-slate-900 outline-none focus:border-secondary">
+                            <option>عيادة الجراحة العامة (د. أحمد الخضيري)</option>
+                            <option>عيادة الباطنة والقلب</option>
+                            <option>عيادة النساء والولادة</option>
+                            <option>عيادة المسالك البولية</option>
+                            <option>قسم البصريات</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="alert('سيتواصل معك فريق الحجز فوراً عبر الواتساب')" class="w-full bg-secondary text-white py-5 rounded-2xl font-black shadow-lg hover:shadow-secondary/20 hover:-translate-y-1 transition-all">
+                        تأكيد طلب الحجز <i class="fab fa-whatsapp mr-2"></i>
+                    </button>
+                </form>
             </div>
+
         </div>
     </section>
 
-    <footer class="bg-primary text-white py-12 text-center">
-        <div class="mb-6">
-            <h2 class="text-xl font-black">مستشفى ابن الحاج التخصصي</h2>
-            <p class="text-[10px] opacity-30 mt-4">© 2026 جميع الحقوق محفوظة - صنعاء - همدان</p>
+    <footer class="bg-slate-900 text-white py-16 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-black mb-4">مستشفى ابن الحاج التخصصي</h2>
+            <p class="opacity-50 text-sm mb-8">نحن هنا من أجل صحتك وصحة عائلتك.. رعاية طبية بلمسة إنسانية.</p>
+            <div class="flex justify-center gap-6 text-2xl mb-12">
+                <i class="fab fa-facebook-f hover:text-secondary cursor-pointer"></i>
+                <i class="fab fa-whatsapp hover:text-secondary cursor-pointer"></i>
+                <i class="fab fa-instagram hover:text-secondary cursor-pointer"></i>
+            </div>
+            <div class="border-t border-white/10 pt-8 text-[10px] opacity-30">
+                © 2026 جميع الحقوق محفوظة - مستشفى ابن الحاج التخصصي - صنعاء همدان
+            </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
+
