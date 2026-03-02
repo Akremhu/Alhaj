@@ -6,7 +6,6 @@
     <title>مستشفى ابن الحاج التخصصي | Ibn Al-Hajj Specialized Hospital</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -14,7 +13,7 @@
         }
     </script>
     <style>
-        /* تحسين وضوح الصور الخلفية لتظهر التفاصيل بوضوح */
+        /* تحسين ووضوح الصور الخلفية للأقسام لتظهر بوضوح خلف الطبقة الشفافة */
         .watermark-bg {
             position: absolute;
             top: 0;
@@ -22,7 +21,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.55; /* درجة وضوح عالية للصور */
+            opacity: 0.55; 
             z-index: 0;
             transition: 0.5s ease;
         }
@@ -30,18 +29,18 @@
             opacity: 0.85;
             transform: scale(1.05);
         }
-        /* حماية النص ليبقى مقروءاً فوق الصور الواضحة (تم جعلها أكثر شفافية) */
+        /* شفافية الأيقونات الداخلية للأقسام */
         .card-content {
             position: relative;
             z-index: 10;
-            background: rgba(255, 255, 255, 0.5); /* تقليل اللون الأبيض لتصبح شفافة */
+            background: rgba(255, 255, 255, 0.45); /* شفافة جداً لتظهر صورة الخلفية */
             padding: 25px;
             border-radius: 20px;
-            backdrop-filter: blur(6px); /* تأثير الزجاج لإبراز الصورة الخلفية */
+            backdrop-filter: blur(8px);
             width: 100%;
         }
         .dark .card-content {
-            background: rgba(30, 41, 59, 0.5); /* شفافية في الوضع الليلي */
+            background: rgba(30, 41, 59, 0.5);
         }
         .dept-card {
             position: relative;
@@ -50,6 +49,45 @@
             display: flex;
             align-items: flex-end;
             border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* ميزة خلفية الشعار للأطباء (المستطيل المليء بالشعار) */
+        .doctor-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .doctor-bg-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%; /* حجم كبير ليملأ المساحة خلف الطبيب */
+            height: auto;
+            opacity: 0.07; /* شفافية ناعمة جداً */
+            z-index: 0;
+            pointer-events: none;
+        }
+        .doctor-info {
+            position: relative;
+            z-index: 1;
+        }
+        .sos-btn {
+            background: #ef4444;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+        }
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+        @keyframes pulse-animation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -97,7 +135,7 @@
             <i class="fas fa-hospital-symbol text-secondary text-4xl mb-4"></i>
             <h3 class="text-2xl font-bold text-primary dark:text-blue-400 mb-4 font-black">لماذا ابن الحاج التخصصي؟</h3>
             <p class="leading-loose opacity-70 text-lg">
-                منذ تأسيسنا في منطقة إبلاس بهمدان، وضعنا نصب أعيننا أن نكون الوجهة الطبية الأولى. نحن لا نقدم علاجاً فحسب، بل نقدم تجربة استشفائية متكاملة تعتمد على نخبة من الأطباء الاستشاريين، وأجهزة طبية هي الأحدث من نوعها في اليمن، مع مراعاة تامة للجانب الإنساني.
+                منذ تأسيسنا في منطقة إبلاس بهمدان، وضعنا نصب أعيننا أن نكون الوجهة الطبية الأولى. نحن لا نقدم علاجاً فحسب، بل نقدم تجربة استشفائية متكاملة تعتمد على نخبة من الأطباء الاستشاريين وأحدث الأجهزة الطبية.
             </p>
         </div>
     </section>
@@ -109,54 +147,54 @@
             <div class="dept-card rounded-3xl shadow-lg">
                 <img src="optics.jpg" class="watermark-bg" alt="البصريات">
                 <div class="card-content m-4">
-                    <i class="fas fa-eye text-2xl text-blue-500 mb-2 drop-shadow-md"></i>
-                    <h4 class="font-bold text-xl mb-1 text-slate-900 dark:text-white">البصريات والعيون</h4>
-                    <p class="text-xs opacity-90 text-slate-800 dark:text-slate-200">فحص النظر بالكمبيوتر وتوفير أحدث العدسات والعمليات الصغرى.</p>
+                    <i class="fas fa-eye text-2xl text-blue-500 mb-2"></i>
+                    <h4 class="font-bold text-xl mb-1 dark:text-white">البصريات والعيون</h4>
+                    <p class="text-xs opacity-90 dark:text-slate-200">فحص النظر بالكمبيوتر وتوفير أحدث العدسات والعمليات الصغرى.</p>
                 </div>
             </div>
 
             <div class="dept-card rounded-3xl shadow-lg">
                 <img src="heart.jpg" class="watermark-bg" alt="القلب">
                 <div class="card-content m-4">
-                    <i class="fas fa-heartbeat text-2xl text-red-500 mb-2 drop-shadow-md"></i>
-                    <h4 class="font-bold text-xl mb-1 text-slate-900 dark:text-white">القلب والباطنية</h4>
-                    <p class="text-xs opacity-90 text-slate-800 dark:text-slate-200">تشخيص دقيق لأمراض القلب، ضغط الدم، والسكري بأحدث أجهزة ECG.</p>
+                    <i class="fas fa-heartbeat text-2xl text-red-500 mb-2"></i>
+                    <h4 class="font-bold text-xl mb-1 dark:text-white">القلب والباطنية</h4>
+                    <p class="text-xs opacity-90 dark:text-slate-200">تشخيص دقيق لأمراض القلب والسكري بأحدث أجهزة ECG.</p>
                 </div>
             </div>
 
             <div class="dept-card rounded-3xl shadow-lg">
                 <img src="maternity.jpg" class="watermark-bg" alt="الأمومة">
                 <div class="card-content m-4">
-                    <i class="fas fa-baby-carriage text-2xl text-emerald-500 mb-2 drop-shadow-md"></i>
-                    <h4 class="font-bold text-xl mb-1 text-slate-900 dark:text-white">الأمومة والطفولة</h4>
-                    <p class="text-xs opacity-90 text-slate-800 dark:text-slate-200">رعاية شاملة للحوامل، ولادة طبيعية وقيصرية، وقسم خاص للحضانات.</p>
+                    <i class="fas fa-baby-carriage text-2xl text-emerald-500 mb-2"></i>
+                    <h4 class="font-bold text-xl mb-1 dark:text-white">الأمومة والطفولة</h4>
+                    <p class="text-xs opacity-90 dark:text-slate-200">رعاية شاملة للحوامل، ولادة طبيعية وقيصرية، وحضانات.</p>
                 </div>
             </div>
 
             <div class="dept-card rounded-3xl shadow-lg">
                 <img src="lab.jpg" class="watermark-bg" alt="المختبر">
                 <div class="card-content m-4">
-                    <i class="fas fa-microscope text-2xl text-purple-500 mb-2 drop-shadow-md"></i>
-                    <h4 class="font-bold text-xl mb-1 text-slate-900 dark:text-white">المختبر المركزي</h4>
-                    <p class="text-xs opacity-90 text-slate-800 dark:text-slate-200">فحوصات هرمونية وفيروسية دقيقة وسريعة بأجهزة تحليل آلية حديثة.</p>
+                    <i class="fas fa-microscope text-2xl text-purple-500 mb-2"></i>
+                    <h4 class="font-bold text-xl mb-1 dark:text-white">المختبر المركزي</h4>
+                    <p class="text-xs opacity-90 dark:text-slate-200">فحوصات هرمونية وفيروسية دقيقة وسريعة بأجهزة تحليل آلية.</p>
                 </div>
             </div>
 
             <div class="dept-card rounded-3xl shadow-lg">
                 <img src="surgery.jpg" class="watermark-bg" alt="الجراحة">
                 <div class="card-content m-4">
-                    <i class="fas fa-user-md text-2xl text-orange-500 mb-2 drop-shadow-md"></i>
-                    <h4 class="font-bold text-xl mb-1 text-slate-900 dark:text-white">الجراحة والمسالك</h4>
-                    <p class="text-xs opacity-90 text-slate-800 dark:text-slate-200">عمليات جراحية كبرى، تفتيت الحصوات بالليزر، وجراحة المناظير.</p>
+                    <i class="fas fa-user-md text-2xl text-orange-500 mb-2"></i>
+                    <h4 class="font-bold text-xl mb-1 dark:text-white">الجراحة والمسالك</h4>
+                    <p class="text-xs opacity-90 dark:text-slate-200">عمليات جراحية كبرى، تفتيت الحصوات بالليزر، والمناظير.</p>
                 </div>
             </div>
 
             <div class="dept-card rounded-3xl shadow-lg">
                 <img src="xray.jpg" class="watermark-bg" alt="الأشعة">
                 <div class="card-content m-4">
-                    <i class="fas fa-x-ray text-2xl text-slate-600 dark:text-slate-400 mb-2 drop-shadow-md"></i>
-                    <h4 class="font-bold text-xl mb-1 text-slate-900 dark:text-white">الأشعة الرقمية</h4>
-                    <p class="text-xs opacity-90 text-slate-800 dark:text-slate-200">تصوير تلفزيوني Ultrasound وأشعة X-Ray رقمية فائقة الوضوح.</p>
+                    <i class="fas fa-x-ray text-2xl text-slate-500 mb-2"></i>
+                    <h4 class="font-bold text-xl mb-1 dark:text-white">الأشعة الرقمية</h4>
+                    <p class="text-xs opacity-90 dark:text-slate-200">تصوير تلفزيوني Ultrasound وأشعة X-Ray رقمية فائقة الوضوح.</p>
                 </div>
             </div>
 
@@ -167,32 +205,44 @@
         <h2 class="text-3xl font-black text-center mb-16">نخبة الكوادر الطبية</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
-                <img src="dr_ahmed.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="">
-                <h4 class="font-bold">د. أحمد الخضيري</h4>
-                <p class="text-secondary text-xs font-bold mb-2">أخصائي الجراحة العامة</p>
-                <p class="text-[10px] opacity-60">خبير في جراحات المناظير والعمليات الجراحية المعقدة.</p>
+            <div class="doctor-card bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
+                <img src="logo.jpg" class="doctor-bg-watermark" alt="">
+                <div class="doctor-info">
+                    <img src="dr_ahmed.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="">
+                    <h4 class="font-bold">د. أحمد الخضيري</h4>
+                    <p class="text-secondary text-xs font-bold mb-2">أخصائي الجراحة العامة</p>
+                    <p class="text-[10px] opacity-60">خبير في جراحات المناظير والعمليات الجراحية المعقدة.</p>
+                </div>
             </div>
 
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
-                <img src="dr_amany.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="">
-                <h4 class="font-bold">د. أماني بن حفيظ</h4>
-                <p class="text-secondary text-xs font-bold mb-2">أخصائية باطنة وقلب</p>
-                <p class="text-[10px] opacity-60">متخصصة في علاج أمراض القلب المزمنة وتخطيط القلب.</p>
+            <div class="doctor-card bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
+                <img src="logo.jpg" class="doctor-bg-watermark" alt="">
+                <div class="doctor-info">
+                    <img src="dr_amany.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="">
+                    <h4 class="font-bold">د. أماني بن حفيظ</h4>
+                    <p class="text-secondary text-xs font-bold mb-2">أخصائية باطنة وقلب</p>
+                    <p class="text-[10px] opacity-60">متخصصة في علاج أمراض القلب المزمنة وتخطيط القلب.</p>
+                </div>
             </div>
 
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
-                <img src="dr_zain.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="">
-                <h4 class="font-bold">د. زين العابدين جروش</h4>
-                <p class="text-secondary text-xs font-bold mb-2">أخصائي مسالك بولية</p>
-                <p class="text-[10px] opacity-60">خبير في علاج العقم وتفتيت حصوات الكلى بالليزر.</p>
+            <div class="doctor-card bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
+                <img src="logo.jpg" class="doctor-bg-watermark" alt="">
+                <div class="doctor-info">
+                    <img src="dr_zain.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="">
+                    <h4 class="font-bold">د. زين العابدين جروش</h4>
+                    <p class="text-secondary text-xs font-bold mb-2">أخصائي مسالك بولية</p>
+                    <p class="text-[10px] opacity-60">خبير في علاج العقم وتفتيت حصوات الكلى بالليزر.</p>
+                </div>
             </div>
 
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
-                <img src="dr_marwa.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="">
-                <h4 class="font-bold">د. مروى الأصبحي</h4>
-                <p class="text-secondary text-xs font-bold mb-2">أخصائية نساء وولادة</p>
-                <p class="text-[10px] opacity-60">رعاية فائقة للأم وجنينها ومتابعة الحمل عالي الخطورة.</p>
+            <div class="doctor-card bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
+                <img src="logo.jpg" class="doctor-bg-watermark" alt="">
+                <div class="doctor-info">
+                    <img src="dr_marwa.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="">
+                    <h4 class="font-bold">د. مروى الأصبحي</h4>
+                    <p class="text-secondary text-xs font-bold mb-2">أخصائية نساء وولادة</p>
+                    <p class="text-[10px] opacity-60">رعاية فائقة للأم وجنينها ومتابعة الحمل عالي الخطورة.</p>
+                </div>
             </div>
 
         </div>
@@ -206,7 +256,7 @@
                     <input type="number" id="weight" placeholder="الوزن (كجم)" class="w-full p-4 rounded-xl border dark:bg-slate-900 outline-none">
                     <input type="number" id="height" placeholder="الطول (سم)" class="w-full p-4 rounded-xl border dark:bg-slate-900 outline-none">
                     <button onclick="calculateBMI()" class="w-full bg-primary text-white py-4 rounded-xl font-bold">تحليل الوزن</button>
-                    <div id="bmi-result" class="hidden mt-4 p-4 rounded-xl text-center font-bold text-primary dark:text-blue-200 bg-blue-100 dark:bg-blue-900/50"></div>
+                    <div id="bmi-result" class="hidden mt-4 p-4 rounded-xl text-center font-bold text-primary dark:text-blue-200 bg-blue-50 dark:bg-blue-900/50"></div>
                 </div>
             </div>
             <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border-t-4 border-pink-400">
@@ -215,7 +265,7 @@
                     <label class="text-xs opacity-50 block">تاريخ أول يوم لآخر دورة شهرية:</label>
                     <input type="date" id="lmp-date" class="w-full p-4 rounded-xl border dark:bg-slate-900 outline-none">
                     <button onclick="calculateDueDate()" class="w-full bg-pink-500 text-white py-4 rounded-xl font-bold">تحديد الموعد</button>
-                    <div id="due-result" class="hidden mt-4 p-4 rounded-xl text-center font-bold text-pink-700 dark:text-pink-200 bg-pink-100 dark:bg-pink-900/50"></div>
+                    <div id="due-result" class="hidden mt-4 p-4 rounded-xl text-center font-bold text-pink-700 dark:text-pink-200 bg-pink-50 dark:bg-pink-900/50"></div>
                 </div>
             </div>
         </div>
@@ -229,7 +279,6 @@
                     <p class="flex items-center gap-4"><i class="fas fa-map-marker-alt text-red-500 text-2xl"></i> صنعاء - همدان - إبلاس (الشارع العام)</p>
                     <p class="flex items-center gap-4"><i class="fas fa-phone text-secondary text-2xl"></i> 782629622</p>
                     <p class="flex items-center gap-4"><i class="fab fa-whatsapp text-emerald-400 text-2xl"></i> 782629622</p>
-                    <p class="text-sm opacity-50">نعمل على مدار 24 ساعة لخدمة حالات الطوارئ.</p>
                 </div>
             </div>
             <div class="bg-white text-slate-900 p-8 rounded-[3rem] shadow-2xl">
@@ -237,7 +286,6 @@
                 <form id="bookingForm" class="space-y-4">
                     <input type="text" placeholder="اسم المريض" class="w-full p-4 rounded-2xl border bg-slate-50 outline-none" required>
                     <select class="w-full p-4 rounded-2xl border bg-slate-50 outline-none">
-                        <option>اختر العيادة</option>
                         <option>الجراحة العامة (د. أحمد الخضيري)</option>
                         <option>الباطنية والقلب (د. أماني)</option>
                         <option>النساء والولادة (د. مروى)</option>
@@ -253,6 +301,41 @@
         © 2026 جميع الحقوق محفوظة - مستشفى ابن الحاج التخصصي - صنعاء همدان
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // دالة الوضع الليلي
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('theme-icon');
+            if (document.documentElement.classList.contains('dark')) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        // حاسبة BMI
+        function calculateBMI() {
+            const w = document.getElementById('weight').value;
+            const h = document.getElementById('height').value / 100;
+            const result = document.getElementById('bmi-result');
+            if (w && h) {
+                const bmi = (w / (h * h)).toFixed(1);
+                result.classList.remove('hidden');
+                result.innerHTML = `مؤشر كتلة جسمك هو: ${bmi}`;
+            }
+        }
+
+        // حاسبة الولادة
+        function calculateDueDate() {
+            const lmp = new Date(document.getElementById('lmp-date').value);
+            const result = document.getElementById('due-result');
+            if (lmp != "Invalid Date") {
+                const dueDate = new Date(lmp);
+                dueDate.setDate(dueDate.getDate() + 280);
+                result.classList.remove('hidden');
+                result.innerHTML = `موعد الولادة المتوقع هو: ${dueDate.toLocaleDateString('ar-EG')}`;
+            }
+        }
+    </script>
 </body>
 </html>
