@@ -13,7 +13,7 @@
         }
     </script>
     <style>
-        /* تحسين ووضوح الصور الخلفية للأقسام لتظهر بوضوح خلف الطبقة الشفافة */
+        /* تحسين وضوح الصور الخلفية للأقسام لتظهر بوضوح خلف الطبقة الشفافة */
         .watermark-bg {
             position: absolute;
             top: 0;
@@ -51,26 +51,29 @@
             border: 1px solid rgba(0,0,0,0.1);
         }
 
-        /* ميزة خلفية الشعار للأطباء (المستطيل المليء بالشعار) */
+        /* --- ميزة خلفية الشعار للأطباء (المستطيل المليء بالشعار) --- */
         .doctor-card {
             position: relative;
             overflow: hidden;
+            z-index: 1; /* كرت الطبيب كطبقة أساسية */
         }
         .doctor-bg-watermark {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90%; /* حجم كبير ليملأ المساحة خلف الطبيب */
+            width: 100%; /* ملئ المستطيل الخلفي للأطباء بالكامل */
             height: auto;
-            opacity: 0.07; /* شفافية ناعمة جداً */
-            z-index: 0;
+            opacity: 0.1; /* شفافية ناعمة جداً لكي لا يطغى على الطبيب */
+            z-index: -1; /* إرسال صورة الشعار للخلف تماماً */
             pointer-events: none;
         }
         .doctor-info {
             position: relative;
-            z-index: 1;
+            z-index: 1; /* جعل معلومات الطبيب وصورته تطفو للأمام */
         }
+        /* -------------------------------------------------------- */
+
         .sos-btn {
             background: #ef4444;
             color: white;
@@ -206,42 +209,42 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             
             <div class="doctor-card bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
-                <img src="logo.jpg" class="doctor-bg-watermark" alt="">
+                <img src="logo.jpg" class="doctor-bg-watermark" alt="Ibn Al-Hajj Logo Watermark">
                 <div class="doctor-info">
-                    <img src="dr_ahmed.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="">
-                    <h4 class="font-bold">د. أحمد الخضيري</h4>
-                    <p class="text-secondary text-xs font-bold mb-2">أخصائي الجراحة العامة</p>
-                    <p class="text-[10px] opacity-60">خبير في جراحات المناظير والعمليات الجراحية المعقدة.</p>
+                    <img src="dr_ahmed.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="د. أحمد الخضيري">
+                    <h4 class="font-bold text-slate-900 dark:text-white">د. أحمد الخضيري</h4>
+                    <p class="text-secondary text-xs font-bold mb-2 uppercase">أخصائي الجراحة العامة</p>
+                    <p class="text-[10px] opacity-70 text-slate-700 dark:text-slate-300">خبير في جراحات المناظير والعمليات الجراحية المعقدة.</p>
                 </div>
             </div>
 
             <div class="doctor-card bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
-                <img src="logo.jpg" class="doctor-bg-watermark" alt="">
+                <img src="logo.jpg" class="doctor-bg-watermark" alt="Ibn Al-Hajj Logo Watermark">
                 <div class="doctor-info">
-                    <img src="dr_amany.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="">
-                    <h4 class="font-bold">د. أماني بن حفيظ</h4>
-                    <p class="text-secondary text-xs font-bold mb-2">أخصائية باطنة وقلب</p>
-                    <p class="text-[10px] opacity-60">متخصصة في علاج أمراض القلب المزمنة وتخطيط القلب.</p>
+                    <img src="dr_amany.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="د. أماني بن حفيظ">
+                    <h4 class="font-bold text-slate-900 dark:text-white">د. أماني بن حفيظ</h4>
+                    <p class="text-secondary text-xs font-bold mb-2 uppercase">أخصائية باطنة وقلب</p>
+                    <p class="text-[10px] opacity-70 text-slate-700 dark:text-slate-300">متخصصة في علاج أمراض القلب المزمنة وتخطيط القلب.</p>
                 </div>
             </div>
 
             <div class="doctor-card bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
-                <img src="logo.jpg" class="doctor-bg-watermark" alt="">
+                <img src="logo.jpg" class="doctor-bg-watermark" alt="Ibn Al-Hajj Logo Watermark">
                 <div class="doctor-info">
-                    <img src="dr_zain.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="">
-                    <h4 class="font-bold">د. زين العابدين جروش</h4>
-                    <p class="text-secondary text-xs font-bold mb-2">أخصائي مسالك بولية</p>
-                    <p class="text-[10px] opacity-60">خبير في علاج العقم وتفتيت حصوات الكلى بالليزر.</p>
+                    <img src="dr_zain.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="د. زين العابدين جروش">
+                    <h4 class="font-bold text-slate-900 dark:text-white">د. زين العابدين جروش</h4>
+                    <p class="text-secondary text-xs font-bold mb-2 uppercase">أخصائي مسالك بولية</p>
+                    <p class="text-[10px] opacity-70 text-slate-700 dark:text-slate-300">خبير في علاج العقم وتفتيت حصوات الكلى بالليزر.</p>
                 </div>
             </div>
 
             <div class="doctor-card bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-xl text-center">
-                <img src="logo.jpg" class="doctor-bg-watermark" alt="">
+                <img src="logo.jpg" class="doctor-bg-watermark" alt="Ibn Al-Hajj Logo Watermark">
                 <div class="doctor-info">
-                    <img src="dr_marwa.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="">
-                    <h4 class="font-bold">د. مروى الأصبحي</h4>
-                    <p class="text-secondary text-xs font-bold mb-2">أخصائية نساء وولادة</p>
-                    <p class="text-[10px] opacity-60">رعاية فائقة للأم وجنينها ومتابعة الحمل عالي الخطورة.</p>
+                    <img src="dr_marwa.jpg" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-secondary shadow-md" alt="د. مروى الأصبحي">
+                    <h4 class="font-bold text-slate-900 dark:text-white">د. مروى الأصبحي</h4>
+                    <p class="text-secondary text-xs font-bold mb-2 uppercase">أخصائية نساء وولادة</p>
+                    <p class="text-[10px] opacity-70 text-slate-700 dark:text-slate-300">رعاية فائقة للأم وجنينها ومتابعة الحمل عالي الخطورة.</p>
                 </div>
             </div>
 
@@ -265,7 +268,7 @@
                     <label class="text-xs opacity-50 block">تاريخ أول يوم لآخر دورة شهرية:</label>
                     <input type="date" id="lmp-date" class="w-full p-4 rounded-xl border dark:bg-slate-900 outline-none">
                     <button onclick="calculateDueDate()" class="w-full bg-pink-500 text-white py-4 rounded-xl font-bold">تحديد الموعد</button>
-                    <div id="due-result" class="hidden mt-4 p-4 rounded-xl text-center font-bold text-pink-700 dark:text-pink-200 bg-pink-50 dark:bg-pink-900/50"></div>
+                    <div id="due-result" class="hidden mt-4 p-4 rounded-xl text-center font-bold text-pink-700 dark:text-pink-200 bg-pink-100 dark:bg-pink-900/50"></div>
                 </div>
             </div>
         </div>
@@ -302,7 +305,7 @@
     </footer>
 
     <script>
-        // دالة الوضع الليلي
+        // دالة الوضع الليلي (تم تصحيحها لضمان ثبات الأيقونة)
         function toggleDarkMode() {
             document.documentElement.classList.toggle('dark');
             const icon = document.getElementById('theme-icon');
@@ -333,7 +336,7 @@
                 const dueDate = new Date(lmp);
                 dueDate.setDate(dueDate.getDate() + 280);
                 result.classList.remove('hidden');
-                result.innerHTML = `موعد الولادة المتوقع هو: ${dueDate.toLocaleDateString('ar-EG')}`;
+                result.innerHTML = `موعد الولادة المتوقع هو: ${dueDate.toLocaleDateString('ar-YE')}`;
             }
         }
     </script>
