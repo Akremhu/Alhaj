@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar-YE" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مستشفى ابن الحاج التخصصي | احترافية الرعاية</title>
+    <meta name="description" content="مستشفى ابن الحاج التخصصي - الرعاية الصحية المتكاملة في همدان. خدمات العيون، القلب، الأمومة، الجراحة، المختبر والأشعة.">
+    <title>مستشفى ابن الحاج التخصصي | رعاية متكاملة بمعايير عالمية</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Tailwind + Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     
     <script>
+        // Tailwind config
         tailwind.config = {
             darkMode: 'class',
             theme: { 
@@ -19,29 +28,62 @@
             }
         }
     </script>
+    
     <style>
-        body { font-family: 'Cairo', sans-serif; font-size: 0.92rem; scroll-behavior: smooth; }
+        /* Base styles & variables */
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #10b981;
+            --text-light: #1e293b;
+            --text-dark: #f1f5f9;
+            --bg-light: #f8fafc;
+            --bg-dark: #0f172a;
+            --card-light: #ffffff;
+            --card-dark: #1e293b;
+            --border-light: #e2e8f0;
+            --border-dark: #334155;
+            --transition: 0.3s ease;
+        }
         
-        /* زر الطوارئ الرشيق */
+        body {
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.92rem;
+            scroll-behavior: smooth;
+            transition: background-color var(--transition), color var(--transition);
+        }
+        
+        /* Smooth theme transition */
+        * {
+            transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
+        }
+        
+        /* Emergency button */
         .sos-btn {
             width: 52px; height: 52px; background: #ef4444; color: white;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             font-size: 20px; position: relative; z-index: 50;
+            box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.5);
         }
         .pulse-ring {
             position: absolute; width: 100%; height: 100%;
             background: #ef4444; border-radius: 50%;
             animation: pulse-ring 2s infinite; z-index: -1;
         }
-        @keyframes pulse-ring { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.7); opacity: 0; } }
-
-        /* الأقسام: توازن الصورة والنص */
+        @keyframes pulse-ring { 
+            0% { transform: scale(1); opacity: 0.6; } 
+            100% { transform: scale(1.7); opacity: 0; } 
+        }
+        
+        /* Department cards */
         .dept-card {
             position: relative; overflow: hidden; height: 300px;
             display: flex; align-items: flex-end; border-radius: 24px;
             border: 1px solid rgba(0,0,0,0.05); transition: 0.4s ease;
         }
-        .dept-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45; transition: 0.5s; }
+        .dept-img { 
+            position: absolute; inset: 0; width: 100%; height: 100%; 
+            object-fit: cover; opacity: 0.45; transition: 0.5s; 
+        }
         .dept-card:hover .dept-img { opacity: 0.75; transform: scale(1.08); }
         .dept-content {
             position: relative; z-index: 10; background: rgba(255, 255, 255, 0.92);
@@ -49,48 +91,102 @@
             text-align: center; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.5);
         }
         .dark .dept-content { background: rgba(30, 41, 59, 0.95); border-color: rgba(255,255,255,0.05); }
-
-        /* الأطباء: تعديل الخلفية لتناسب الوضع الليلي */
-        .dr-card {
-            background: white; border-radius: 28px; padding: 30px 20px;
-            text-align: center; position: relative; overflow: hidden;
-            border: 1px solid #f1f5f9; transition: 0.4s;
-        }
-        /* كود الوضع الليلي الجديد للأطباء */
-        .dark .dr-card { background: #1e293b; border-color: #334155; }
         
-        .dr-card:hover { transform: translateY(-7px); border-color: #10b981; box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1); }
+        /* Doctor cards */
+        .dr-card {
+            background: var(--card-light); border-radius: 28px; padding: 30px 20px;
+            text-align: center; position: relative; overflow: hidden;
+            border: 1px solid var(--border-light); transition: 0.4s;
+        }
+        .dark .dr-card { background: var(--card-dark); border-color: var(--border-dark); }
+        .dr-card:hover { 
+            transform: translateY(-7px); 
+            border-color: var(--secondary); 
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.2);
+        }
         .dr-watermark {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 75%; opacity: 0.1; z-index: 0; pointer-events: none;
         }
         .dr-content { position: relative; z-index: 10; }
-        .dr-img { width: 95px; height: 95px; margin: 0 auto 18px; border-radius: 50%; border: 4px solid #10b981; object-fit: cover; }
-
-        /* تنسيق الحقول لضمان ظهورها في الوضعين */
+        .dr-img { 
+            width: 95px; height: 95px; margin: 0 auto 18px; border-radius: 50%; 
+            border: 4px solid var(--secondary); object-fit: cover; 
+        }
+        
+        /* Form inputs */
         .form-input {
             width: 100%; padding: 12px; border-radius: 12px; outline: none; transition: 0.3s;
-            font-size: 0.85rem; background: #f8fafc; border: 1px solid #e2e8f0; color: #1e293b;
+            font-size: 0.85rem; background: var(--bg-light); border: 1px solid var(--border-light); 
+            color: var(--text-light);
         }
-        .dark .form-input { background: #0f172a; border-color: #334155; color: #f1f5f9; }
+        .dark .form-input { background: var(--bg-dark); border-color: var(--border-dark); color: var(--text-dark); }
+        .form-input:focus {
+            ring: 2px solid var(--primary); border-color: transparent;
+        }
+        
+        /* Better contrast in dark mode */
+        .dark .opacity-70 { opacity: 0.85; }
+        .dark .opacity-60 { opacity: 0.8; }
+        
+        /* Tooltip */
+        [data-tooltip] {
+            position: relative;
+            cursor: help;
+        }
+        [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 100;
+        }
+        [data-tooltip]:hover:before {
+            opacity: 1;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 2px solid white;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 8px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 transition-all">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200">
 
+    <!-- Floating Buttons -->
     <div class="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
-        <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-xl flex items-center justify-center text-lg hover:scale-110 transition">
+        <button id="themeToggle" class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-xl flex items-center justify-center text-lg hover:scale-110 transition" data-tooltip="تغيير السمة">
             <i id="theme-icon" class="fas fa-moon"></i>
         </button>
-        <a href="tel:782629622" class="sos-btn shadow-2xl">
+        <a href="tel:782629622" class="sos-btn shadow-2xl" data-tooltip="طوارئ - اتصل الآن">
             <div class="pulse-ring"></div>
             <i class="fas fa-ambulance"></i>
         </a>
     </div>
 
-<header class="bg-white/90 dark:bg-slate-800/95 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100 dark:border-slate-700">
+    <!-- Header -->
+    <header class="bg-white/90 dark:bg-slate-800/95 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100 dark:border-slate-700">
         <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <img src="logo.jpg" class="h-11 w-auto rounded-lg">
+                <img src="logo.jpg" alt="شعار مستشفى ابن الحاج التخصصي" class="h-11 w-auto rounded-lg" loading="lazy">
                 <div>
                     <h1 class="text-primary dark:text-blue-400 text-lg md:text-xl font-black leading-none">مستشفى ابن الحاج</h1>
                     <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-1">Specialized Hospital</p>
@@ -100,294 +196,421 @@
         </div>
     </header>
 
-    <section class="bg-primary py-20 px-6 text-center text-white relative overflow-hidden">
-        <div class="relative z-10">
-            <h2 class="text-2xl md:text-4xl font-black mb-4">ريادة طبية.. بروح إنسانية</h2>
-            <p class="text-xs md:text-sm opacity-80 max-w-xl mx-auto leading-relaxed">نحن هنا لنقدم لك رعاية طبية متكاملة تعتمد على أحدث التقنيات ونخبة من الاستشاريين في منطقة همدان.</p>
-        </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto -mt-10 relative z-20 px-6">
-        <div class="bg-white dark:bg-slate-800 p-8 rounded-[2.5rem] shadow-2xl border border-slate-50 dark:border-slate-700 text-center">
-            <div class="inline-flex items-center justify-center w-12 h-12 bg-secondary/10 text-secondary rounded-full mb-4">
-                <i class="fas fa-hand-holding-heart text-xl"></i>
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-primary py-20 px-6 text-center text-white relative overflow-hidden">
+            <div class="relative z-10">
+                <h2 class="text-2xl md:text-4xl font-black mb-4">ريادة طبية.. بروح إنسانية</h2>
+                <p class="text-xs md:text-sm opacity-80 max-w-xl mx-auto leading-relaxed">
+                    نقدم لك رعاية طبية متكاملة تعتمد على أحدث التقنيات العالمية وبإشراف نخبة من الاستشاريين في منطقة همدان.
+                </p>
             </div>
-            <h3 class="text-lg font-black text-primary dark:text-blue-400 mb-4">لماذا يختار المرضى مستشفى ابن الحاج؟</h3>
-            <p class="text-xs md:text-sm leading-loose opacity-75 font-semibold">
-                نتميز في "ابن الحاج التخصصي" بكوننا الوجهة الأولى لسكان مديرية همدان والمناطق المجاورة، حيث نجمع بين القرب الجغرافي والجودة العالمية. نوفر أحدث غرف العمليات بنظام التعقيم المتطور، ومختبرات آلية بالكامل، مع التزامنا التام بتقديم الخدمة بأسعار تراعي الظروف الإنسانية دون المساومة على الجودة.
-            </p>
-        </div>
-    </section>
+        </section>
 
-    <section class="py-20 px-6 max-w-6xl mx-auto">
-        <h3 class="text-xl font-black text-center mb-12 underline decoration-secondary decoration-4 underline-offset-8">خدماتنا الطبية المتخصصة</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <div class="dept-card group">
-                <img src="optics.jpg" class="dept-img">
-                <div class="dept-content">
-                    <i class="fas fa-eye text-blue-500 text-xl mb-2"></i>
-                    <h4 class="font-bold text-sm mb-1">العيون والبصريات</h4>
-                    <p class="text-[10px] opacity-70">فحص نظر دقيق بالكمبيوتر، علاج المياه الزرقاء، وتوفير أحدث أنواع العدسات الطبية.</p>
+        <!-- Why Choose Us -->
+        <section class="max-w-4xl mx-auto -mt-10 relative z-20 px-6">
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-[2.5rem] shadow-2xl border border-slate-50 dark:border-slate-700 text-center">
+                <div class="inline-flex items-center justify-center w-12 h-12 bg-secondary/10 text-secondary rounded-full mb-4">
+                    <i class="fas fa-hand-holding-heart text-xl"></i>
                 </div>
+                <h2 class="text-lg font-black text-primary dark:text-blue-400 mb-4">لماذا نعتبر الخيار الأول لسكان همدان؟</h2>
+                <p class="text-xs md:text-sm leading-loose opacity-75 font-semibold">
+                    في مستشفى ابن الحاج التخصصي، نجمع بين القرب الجغرافي والجودة العالمية. نعتمد على أحدث غرف العمليات بنظام التعقيم المتطور، ومختبرات آلية بالكامل، وفريق طبي متكامل على مدار الساعة. نلتزم بتقديم الخدمات الطبية بأسعار تراعي الظروف الإنسانية دون المساومة على الجودة، ونفخر بكوننا الوجهة الصحية الأولى في مديرية همدان والمناطق المجاورة.
+                </p>
             </div>
+        </section>
 
-            <div class="dept-card">
-                <img src="heart.jpg" class="dept-img">
-                <div class="dept-content">
-                    <i class="fas fa-heartbeat text-red-500 text-xl mb-2"></i>
-                    <h4 class="font-bold text-sm mb-1">القلب والباطنية</h4>
-                    <p class="text-[10px] opacity-70">تشخيص وعلاج أمراض القلب، تنظيم ضغط الدم، ومتابعة مرضى السكري بأحدث الأجهزة.</p>
-                </div>
-            </div>
-
-            <div class="dept-card">
-                <img src="maternity.jpg" class="dept-img">
-                <div class="dept-content">
-                    <i class="fas fa-baby-carriage text-emerald-500 text-xl mb-2"></i>
-                    <h4 class="font-bold text-sm mb-1">الأمومة والطفولة</h4>
-                    <p class="text-[10px] opacity-70">ولادة طبيعية وقيصرية آمنة، متابعة نمو الجنين، وقسم حضانات متطور لحديثي الولادة.</p>
-                </div>
-            </div>
-
-            <div class="dept-card">
-                <img src="lab.jpg" class="dept-img">
-                <div class="dept-content">
-                    <i class="fas fa-microscope text-purple-500 text-xl mb-2"></i>
-                    <h4 class="font-bold text-sm mb-1">المختبر المركزي</h4>
-                    <p class="text-[10px] opacity-70">تحاليل شاملة، هرمونات، وفحوصات فيروسية دقيقة باستخدام تقنيات التحليل الآلي السريع.</p>
-                </div>
-            </div>
-
-            <div class="dept-card">
-                <img src="surgery.jpg" class="dept-img">
-                <div class="dept-content">
-                    <i class="fas fa-user-md text-orange-500 text-xl mb-2"></i>
-                    <h4 class="font-bold text-sm mb-1">الجراحة والمسالك</h4>
-                    <p class="text-[10px] opacity-70">عمليات الجراحة العامة، تفتيت الحصوات بالليزر، وجراحات المناظير المتطورة.</p>
-                </div>
-            </div>
-
-            <div class="dept-card">
-                <img src="xray.jpg" class="dept-img">
-                <div class="dept-content">
-                    <i class="fas fa-x-ray text-slate-500 text-xl mb-2"></i>
-                    <h4 class="font-bold text-sm mb-1">الأشعة الرقمية</h4>
-                    <p class="text-[10px] opacity-70">أجهزة Ultrasound رباعية الأبعاد وأشعة X-Ray رقمية توفر وضوحاً فائقاً للتشخيص.</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="py-20 bg-slate-100 dark:bg-slate-900/50 px-6 border-y border-slate-200 dark:border-slate-800">
-        <h3 class="text-xl font-black text-center mb-12">نخبة الاستشاريين</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            
-            <div class="dr-card">
-                <img src="logo.jpg" class="dr-watermark">
-                <div class="dr-content">
-                    <img src="dr_ahmed.jpg" class="dr-img">
-                    <h4 class="text-primary dark:text-blue-300 font-bold text-sm">د. أحمد الخضيري</h4>
-                    <p class="text-secondary text-[10px] font-black mb-3">أخصائي الجراحة العامة</p>
-                    <p class="text-[10px] opacity-60 px-2">متخصص في العمليات الجراحية الكبرى وجراحات المناظير المتقدمة.</p>
-                </div>
-            </div>
-
-            <div class="dr-card">
-                <img src="logo.jpg" class="dr-watermark">
-                <div class="dr-content">
-                    <img src="dr_amany.jpg" class="dr-img">
-                    <h4 class="text-primary dark:text-blue-300 font-bold text-sm">د. أماني بن حفيظ</h4>
-                    <p class="text-secondary text-[10px] font-black mb-3">أخصائية باطنة وقلب</p>
-                    <p class="text-[10px] opacity-60 px-2">خبرة واسعة في تشخيص أمراض القلب وتخطيط الجهد ومتابعة الباطنية.</p>
-                </div>
-            </div>
-
-            <div class="dr-card">
-                <img src="logo.jpg" class="dr-watermark">
-                <div class="dr-content">
-                    <img src="dr_zain.jpg" class="dr-img">
-                    <h4 class="text-primary dark:text-blue-300 font-bold text-sm">د. زين العابدين</h4>
-                    <p class="text-secondary text-[10px] font-black mb-3">أخصائي مسالك بولية</p>
-                    <p class="text-[10px] opacity-60 px-2">علاج أمراض العقم، تفتيت الحصوات، وعمليات المسالك البولية النوعية.</p>
-                </div>
-            </div>
-
-            <div class="dr-card">
-                <img src="logo.jpg" class="dr-watermark">
-                <div class="dr-content">
-                    <img src="dr_marwa.jpg" class="dr-img">
-                    <h4 class="text-primary dark:text-blue-300 font-bold text-sm">د. مروى الأصبحي</h4>
-                    <p class="text-secondary text-[10px] font-black mb-3">أخصائية نساء وولادة</p>
-                    <p class="text-[10px] opacity-60 px-2">رعاية الحمل والولادة، علاج تأخر الإنجاب، والجراحات النسائية.</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="py-20 px-6 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
-            <h4 class="font-black text-primary mb-6 text-sm">حاسبة مؤشر كتلة الجسم (BMI)</h4>
-            <div class="space-y-4">
-                <div class="flex gap-4">
-                    <input type="number" id="w" placeholder="الوزن (كجم)" class="w-1/2 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-xs outline-none focus:ring-1 ring-primary">
-                    <input type="number" id="h" placeholder="الطول (سم)" class="w-1/2 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-xs outline-none focus:ring-1 ring-primary">
-                </div>
-                <button onclick="calcBMI()" class="w-full bg-primary text-white py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">تحليل الحالة الصحية</button>
-                <div id="res-bmi" class="hidden transition-all duration-500"></div>
-            </div>
-        </div>
-        
-        <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
-            <h4 class="font-black text-pink-600 mb-6 text-sm">حاسبة موعد الولادة المتوقع</h4>
-            <div class="space-y-4">
-                <label class="text-[10px] font-bold opacity-50">تاريخ أول يوم من آخر دورة شهرية:</label>
-                <input type="date" id="lmp" class="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-xs outline-none focus:ring-1 ring-pink-500">
-                <button onclick="calcDue()" class="w-full bg-pink-500 text-white py-3 rounded-xl font-bold text-xs hover:bg-pink-600 transition">تحديد الموعد</button>
-                <div id="res-due" class="hidden transition-all duration-500"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="booking" class="py-20 px-6 max-w-3xl mx-auto">
-        <div class="bg-white dark:bg-slate-800 p-10 rounded-[2.5rem] shadow-xl border border-slate-50 dark:border-slate-700">
-            <div class="text-center mb-10">
-                <h3 class="text-xl font-black text-primary dark:text-blue-400 mb-2">طلب حجز موعد إلكتروني</h3>
-                <p class="text-xs opacity-70 dark:text-slate-300">سيتم تحويلك للواتساب لتأكيد الحجز فور الإرسال</p>
-            </div>
-            
-            <form id="bookingForm" class="space-y-6" onsubmit="sendToWhatsApp(event)">
-                <div>
-                    <label class="block text-[11px] font-bold mb-2 dark:text-slate-300">اسم المريض الكامل:</label>
-                    <input type="text" id="patientName" placeholder="أدخل الاسم الرباعي" class="form-input" required>
-                </div>
+        <!-- Services -->
+        <section class="py-20 px-6 max-w-6xl mx-auto">
+            <h2 class="text-xl font-black text-center mb-12 underline decoration-secondary decoration-4 underline-offset-8">خدماتنا الطبية المتخصصة</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <div>
-                    <label class="block text-[11px] font-bold mb-2 dark:text-slate-300">العيادة الطبية المطلوبة:</label>
-                    <select id="clinicSelect" class="form-input appearance-none" required>
-                        <option value="" disabled selected>اختر العيادة</option>
-                        <option value="العيون والبصريات">عيادة العيون والبصريات</option>
-                        <option value="القلب والباطنية">عيادة القلب والباطنية</option>
-                        <option value="الأمومة والطفولة">عيادة الأمومة والطفولة</option>
-                        <option value="الجراحة والمسالك">عيادة الجراحة والمسالك</option>
-                        <option value="الأسنان">عيادة الأسنان</option>
-                        <option value="العظام">عيادة العظام</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block text-[11px] font-bold mb-2 dark:text-slate-300">رقم التواصل:</label>
-                    <input type="tel" id="patientPhone" placeholder="7xxxxxxxx" class="form-input text-right" required>
-                </div>
-                
-                <div class="pt-4">
-                    <button type="submit" class="w-full bg-secondary text-white py-3.5 rounded-xl font-bold text-sm hover:brightness-105 transition shadow-lg shadow-secondary/20">
-                        إرسال طلب الحجز عبر واتساب <i class="fab fa-whatsapp mr-2"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <section class="py-16 bg-slate-100 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800">
-        <div class="max-w-4xl mx-auto px-6">
-            <h3 class="text-xl font-black text-center mb-10">أين تجدونا</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center md:text-right">
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4 justify-center md:justify-start">
-                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary text-xl">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold opacity-50">الموقع</p>
-                            <p class="font-black text-sm">صنعاء - مديرية همدان - منطقة إبلاس (الشارع العام)</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4 justify-center md:justify-start">
-                        <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary text-xl">
-                            <i class="fas fa-phone-alt"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold opacity-50">للتواصل المباشر</p>
-                            <p class="font-black text-sm dir-ltr">782629622</p>
-                        </div>
+                <div class="dept-card group">
+                    <img src="optics.jpg" alt="عيادة العيون: فحص النظر وتوفير العدسات الطبية" class="dept-img" loading="lazy">
+                    <div class="dept-content">
+                        <i class="fas fa-eye text-blue-500 text-xl mb-2"></i>
+                        <h3 class="font-bold text-sm mb-1">العيون والبصريات</h3>
+                        <p class="text-[10px] opacity-70">فحص نظر دقيق بالكمبيوتر، علاج المياه الزرقاء، وتوفير أحدث العدسات الطبية والنظارات.</p>
                     </div>
                 </div>
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700">
-                    <i class="fas fa-hospital-user text-5xl text-primary/20 mb-4"></i>
-                    <p class="text-xs leading-loose font-bold italic opacity-70">"نحن ملتزمون بتقديم أفضل الخدمات الطبية لأبناء مديرية همدان والمناطق المجاورة على مدار الساعة."</p>
+
+                <div class="dept-card">
+                    <img src="heart.jpg" alt="عيادة القلب: تشخيص وعلاج أمراض القلب وضغط الدم" class="dept-img" loading="lazy">
+                    <div class="dept-content">
+                        <i class="fas fa-heartbeat text-red-500 text-xl mb-2"></i>
+                        <h3 class="font-bold text-sm mb-1">القلب والباطنية</h3>
+                        <p class="text-[10px] opacity-70">تشخيص دقيق لأمراض القلب، تنظيم ضغط الدم، ومتابعة مرضى السكري بأحدث أجهزة التخطيط.</p>
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <img src="maternity.jpg" alt="قسم الأمومة: ولادة آمنة ورعاية متكاملة لحديثي الولادة" class="dept-img" loading="lazy">
+                    <div class="dept-content">
+                        <i class="fas fa-baby-carriage text-emerald-500 text-xl mb-2"></i>
+                        <h3 class="font-bold text-sm mb-1">الأمومة والطفولة</h3>
+                        <p class="text-[10px] opacity-70">ولادة طبيعية وقيصرية آمنة، متابعة الحمل بأربع أبعاد، وحضانات مجهزة بالكامل.</p>
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <img src="lab.jpg" alt="المختبر المركزي: تحاليل طبية شاملة بدقة عالية" class="dept-img" loading="lazy">
+                    <div class="dept-content">
+                        <i class="fas fa-microscope text-purple-500 text-xl mb-2"></i>
+                        <h3 class="font-bold text-sm mb-1">المختبر المركزي</h3>
+                        <p class="text-[10px] opacity-70">تحاليل شاملة، هرمونات، وفحوصات فيروسية باستخدام أحدث تقنيات التحليل الآلي.</p>
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <img src="surgery.jpg" alt="الجراحة العامة والمسالك: عمليات دقيقة بالمناظير والليزر" class="dept-img" loading="lazy">
+                    <div class="dept-content">
+                        <i class="fas fa-user-md text-orange-500 text-xl mb-2"></i>
+                        <h3 class="font-bold text-sm mb-1">الجراحة والمسالك</h3>
+                        <p class="text-[10px] opacity-70">عمليات الجراحة العامة، تفتيت الحصوات بالليزر، وجراحات المناظير المتطورة.</p>
+                    </div>
+                </div>
+
+                <div class="dept-card">
+                    <img src="xray.jpg" alt="الأشعة الرقمية: تشخيص دقيق بأجهزة حديثة" class="dept-img" loading="lazy">
+                    <div class="dept-content">
+                        <i class="fas fa-x-ray text-slate-500 text-xl mb-2"></i>
+                        <h3 class="font-bold text-sm mb-1">الأشعة الرقمية</h3>
+                        <p class="text-[10px] opacity-70">أجهزة Ultrasound رباعية الأبعاد وأشعة X-Ray رقمية توفر وضوحاً فائقاً.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
+        <!-- Doctors -->
+        <section class="py-20 bg-slate-100 dark:bg-slate-900/50 px-6 border-y border-slate-200 dark:border-slate-800">
+            <h2 class="text-xl font-black text-center mb-12">نخبة الاستشاريين</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                
+                <div class="dr-card">
+                    <img src="logo.jpg" alt="" class="dr-watermark" aria-hidden="true">
+                    <div class="dr-content">
+                        <img src="dr_ahmed.jpg" alt="الدكتور أحمد الخضيري - أخصائي الجراحة العامة" class="dr-img" loading="lazy">
+                        <h3 class="text-primary dark:text-blue-300 font-bold text-sm">د. أحمد الخضيري</h3>
+                        <p class="text-secondary text-[10px] font-black mb-3">أخصائي الجراحة العامة</p>
+                        <p class="text-[10px] opacity-60 px-2">خبرة 15 عاماً في العمليات الجراحية الكبرى وجراحات المناظير المتقدمة.</p>
+                    </div>
+                </div>
+
+                <div class="dr-card">
+                    <img src="logo.jpg" alt="" class="dr-watermark" aria-hidden="true">
+                    <div class="dr-content">
+                        <img src="dr_amany.jpg" alt="الدكتورة أماني بن حفيظ - أخصائية باطنة وقلب" class="dr-img" loading="lazy">
+                        <h3 class="text-primary dark:text-blue-300 font-bold text-sm">د. أماني بن حفيظ</h3>
+                        <p class="text-secondary text-[10px] font-black mb-3">أخصائية باطنة وقلب</p>
+                        <p class="text-[10px] opacity-60 px-2">استشارية في تشخيص أمراض القلب وتخطيط الجهد ومتابعة الباطنية.</p>
+                    </div>
+                </div>
+
+                <div class="dr-card">
+                    <img src="logo.jpg" alt="" class="dr-watermark" aria-hidden="true">
+                    <div class="dr-content">
+                        <img src="dr_zain.jpg" alt="الدكتور زين العابدين - أخصائي مسالك بولية" class="dr-img" loading="lazy">
+                        <h3 class="text-primary dark:text-blue-300 font-bold text-sm">د. زين العابدين</h3>
+                        <p class="text-secondary text-[10px] font-black mb-3">أخصائي مسالك بولية</p>
+                        <p class="text-[10px] opacity-60 px-2">متخصص في علاج أمراض العقم، تفتيت الحصوات، وجراحات المسالك النوعية.</p>
+                    </div>
+                </div>
+
+                <div class="dr-card">
+                    <img src="logo.jpg" alt="" class="dr-watermark" aria-hidden="true">
+                    <div class="dr-content">
+                        <img src="dr_marwa.jpg" alt="الدكتورة مروى الأصبحي - أخصائية نساء وولادة" class="dr-img" loading="lazy">
+                        <h3 class="text-primary dark:text-blue-300 font-bold text-sm">د. مروى الأصبحي</h3>
+                        <p class="text-secondary text-[10px] font-black mb-3">أخصائية نساء وولادة</p>
+                        <p class="text-[10px] opacity-60 px-2">رعاية الحمل والولادة، علاج تأخر الإنجاب، والجراحات النسائية التجميلية.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section class="py-20 px-6 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- BMI Calculator -->
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <h3 class="font-black text-primary mb-6 text-sm">حاسبة مؤشر كتلة الجسم (BMI)</h3>
+                <div class="space-y-4">
+                    <div class="flex gap-4">
+                        <input type="number" id="weight" placeholder="الوزن (كجم)" class="w-1/2 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-xs outline-none focus:ring-2 focus:ring-primary" step="0.1" min="1">
+                        <input type="number" id="height" placeholder="الطول (سم)" class="w-1/2 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-xs outline-none focus:ring-2 focus:ring-primary" step="0.1" min="1">
+                    </div>
+                    <button id="calcBmiBtn" class="w-full bg-primary text-white py-3 rounded-xl font-bold text-xs hover:bg-blue-800 transition">تحليل الحالة الصحية</button>
+                    <div id="bmiResult" class="hidden transition-all duration-500"></div>
+                </div>
+            </div>
+            
+            <!-- Due Date Calculator -->
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <h3 class="font-black text-pink-600 mb-6 text-sm">حاسبة موعد الولادة المتوقع</h3>
+                <div class="space-y-4">
+                    <label class="text-[10px] font-bold opacity-50">تاريخ أول يوم من آخر دورة شهرية:</label>
+                    <input type="date" id="lmpDate" class="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-xs outline-none focus:ring-2 focus:ring-pink-500">
+                    <button id="calcDueBtn" class="w-full bg-pink-500 text-white py-3 rounded-xl font-bold text-xs hover:bg-pink-600 transition">تحديد الموعد</button>
+                    <div id="dueResult" class="hidden transition-all duration-500"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="booking" class="py-20 px-6 max-w-3xl mx-auto scroll-mt-20">
+            <div class="bg-white dark:bg-slate-800 p-10 rounded-[2.5rem] shadow-xl border border-slate-50 dark:border-slate-700">
+                <div class="text-center mb-10">
+                    <h2 class="text-xl font-black text-primary dark:text-blue-400 mb-2">طلب حجز موعد إلكتروني</h2>
+                    <p class="text-xs opacity-70 dark:text-slate-300">سيتم تحويلك إلى الواتساب لتأكيد الحجز فور الإرسال</p>
+                </div>
+                
+                <form id="bookingForm" class="space-y-6">
+                    <div>
+                        <label class="block text-[11px] font-bold mb-2 dark:text-slate-300">اسم المريض الكامل:</label>
+                        <input type="text" id="patientName" placeholder="أدخل الاسم الرباعي" class="form-input" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-[11px] font-bold mb-2 dark:text-slate-300">العيادة الطبية المطلوبة:</label>
+                        <select id="clinicSelect" class="form-input appearance-none" required>
+                            <option value="" disabled selected>اختر العيادة</option>
+                            <option value="العيون والبصريات">عيادة العيون والبصريات</option>
+                            <option value="القلب والباطنية">عيادة القلب والباطنية</option>
+                            <option value="الأمومة والطفولة">عيادة الأمومة والطفولة</option>
+                            <option value="الجراحة والمسالك">عيادة الجراحة والمسالك</option>
+                            <option value="الأسنان">عيادة الأسنان</option>
+                            <option value="العظام">عيادة العظام</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold mb-2 dark:text-slate-300">رقم التواصل:</label>
+                        <input type="tel" id="patientPhone" placeholder="7xxxxxxxx" class="form-input text-right" required pattern="[0-9]{9,10}" title="أدخل رقم صحيح مكون من 9-10 أرقام">
+                    </div>
+                    
+                    <div class="pt-4">
+                        <button type="submit" id="bookingSubmitBtn" class="w-full bg-secondary text-white py-3.5 rounded-xl font-bold text-sm hover:brightness-105 transition shadow-lg shadow-secondary/20 flex items-center justify-center gap-2">
+                            <span>إرسال طلب الحجز عبر واتساب</span>
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Location & Info -->
+        <section class="py-16 bg-slate-100 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800">
+            <div class="max-w-4xl mx-auto px-6">
+                <h2 class="text-xl font-black text-center mb-10">أين تجدونا</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center md:text-right">
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 justify-center md:justify-start">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary text-xl">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold opacity-50">الموقع</p>
+                                <p class="font-black text-sm">صنعاء - مديرية همدان - منطقة إبلاس (الشارع العام)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 justify-center md:justify-start">
+                            <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary text-xl">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold opacity-50">للتواصل المباشر</p>
+                                <p class="font-black text-sm dir-ltr">782629622</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700">
+                        <i class="fas fa-hospital-user text-5xl text-primary/20 mb-4"></i>
+                        <p class="text-xs leading-loose font-bold italic opacity-70">
+                            "نحن ملتزمون بتقديم أفضل الخدمات الطبية لأبناء مديرية همدان والمناطق المجاورة على مدار الساعة."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
     <footer class="py-12 text-center text-[10px] opacity-40 border-t border-slate-100 dark:border-slate-800">
         صنعاء - مديرية همدان - منطقة إبلاس (الشارع العام) - هاتف: 782629622<br>
         © 2026 جميع الحقوق محفوظة لمستشفى ابن الحاج التخصصي
     </footer>
 
     <script>
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle('dark');
-            const isDark = document.documentElement.classList.contains('dark');
-            document.getElementById('theme-icon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-        }
-
-        // وظيفة إرسال الحجز إلى الواتساب
-        function sendToWhatsApp(event) {
-            event.preventDefault();
-            const name = document.getElementById('patientName').value;
-            const clinic = document.getElementById('clinicSelect').value;
-            const phone = document.getElementById('patientPhone').value;
-            const hospitalNumber = "967782629622";
-
-            const message = `*طلب حجز موعد جديد*%0A` +
-                            `--------------------------%0A` +
-                            `*اسم المريض:* ${name}%0A` +
-                            `*العيادة:* ${clinic}%0A` +
-                            `*رقم التواصل:* ${phone}%0A` +
-                            `--------------------------%0A` +
-                            `تم الإرسال عبر الموقع الإلكتروني للمستشفى.`;
-
-            window.open(`https://wa.me/${hospitalNumber}?text=${message}`, '_blank');
-        }
-
-        function calcBMI() {
-            const weight = parseFloat(document.getElementById('w').value);
-            const height = parseFloat(document.getElementById('h').value) / 100;
-            const res = document.getElementById('res-bmi');
-            if (weight && height) {
-                const bmi = (weight / (height * height)).toFixed(1);
-                res.className = "block mt-4 p-3 rounded-xl text-center";
-                let tip = "";
-                if(bmi < 18.5) { 
-                    res.classList.add('bg-blue-50', 'text-blue-700'); 
-                    tip = "وزنك أقل من الطبيعي. يفضل استشارة أخصائي الباطنية لدينا."; 
-                } else if(bmi < 25) { 
-                    res.classList.add('bg-emerald-50', 'text-emerald-700'); 
-                    tip = "وزنك مثالي! استمر في اتباع نمط حياة صحي."; 
-                } else { 
-                    res.classList.add('bg-orange-50', 'text-orange-700'); 
-                    tip = "لديك زيادة في الوزن. ننصحك بتقليل السكريات وزيادة النشاط البدني."; 
+        (function() {
+            // -------------------- THEME MANAGEMENT --------------------
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            // Apply saved theme or system preference
+            function applyTheme(theme) {
+                if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                    themeIcon.className = 'fas fa-sun';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    themeIcon.className = 'fas fa-moon';
                 }
-                res.innerHTML = `<p class="font-black text-sm">مؤشر الكتلة: ${bmi}</p><p class="text-[9px] mt-1">${tip}</p>`;
             }
-        }
-
-        function calcDue() {
-            const inputDate = new Date(document.getElementById('lmp').value);
-            const res = document.getElementById('res-due');
-            if (inputDate != "Invalid Date") {
-                inputDate.setDate(inputDate.getDate() + 280);
-                res.className = "block mt-4 p-3 rounded-xl text-center bg-pink-50 text-pink-700";
-                res.innerHTML = `
-                    <p class="font-black text-sm">الموعد المتوقع: ${inputDate.toLocaleDateString('ar-YE')}</p>
+            
+            const savedTheme = localStorage.getItem('theme');
+            applyTheme(savedTheme);
+            
+            themeToggle.addEventListener('click', function() {
+                document.documentElement.classList.toggle('dark');
+                const isDark = document.documentElement.classList.contains('dark');
+                themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+            
+            // -------------------- BMI CALCULATOR --------------------
+            const calcBmiBtn = document.getElementById('calcBmiBtn');
+            const weightInput = document.getElementById('weight');
+            const heightInput = document.getElementById('height');
+            const bmiResult = document.getElementById('bmiResult');
+            
+            function calculateBMI() {
+                const weight = parseFloat(weightInput.value);
+                const heightCm = parseFloat(heightInput.value);
+                
+                // Validation
+                if (!weight || !heightCm || weight <= 0 || heightCm <= 0) {
+                    alert('الرجاء إدخال قيم صحيحة للوزن والطول');
+                    return;
+                }
+                
+                const heightM = heightCm / 100;
+                const bmi = (weight / (heightM * heightM)).toFixed(1);
+                
+                // Reset classes and show result
+                bmiResult.className = "block mt-4 p-3 rounded-xl text-center transition-all duration-500";
+                let tip = "", bgClass = "", textClass = "";
+                
+                if (bmi < 18.5) {
+                    bgClass = 'bg-blue-50 dark:bg-blue-900/30';
+                    textClass = 'text-blue-700 dark:text-blue-300';
+                    tip = "وزنك أقل من الطبيعي. نوصي باستشارة أخصائي التغذية أو الباطنية.";
+                } else if (bmi < 25) {
+                    bgClass = 'bg-emerald-50 dark:bg-emerald-900/30';
+                    textClass = 'text-emerald-700 dark:text-emerald-300';
+                    tip = "وزنك مثالي! استمر في اتباع نمط حياة صحي.";
+                } else {
+                    bgClass = 'bg-orange-50 dark:bg-orange-900/30';
+                    textClass = 'text-orange-700 dark:text-orange-300';
+                    tip = "لديك زيادة في الوزن. ننصحك بتقليل السكريات وزيادة النشاط البدني.";
+                }
+                
+                bmiResult.classList.add(bgClass, textClass);
+                bmiResult.innerHTML = `<p class="font-black text-sm">مؤشر الكتلة: ${bmi}</p><p class="text-[9px] mt-1">${tip}</p>`;
+            }
+            
+            calcBmiBtn.addEventListener('click', calculateBMI);
+            
+            // Optional: clear result when inputs change
+            weightInput.addEventListener('input', () => bmiResult.classList.add('hidden'));
+            heightInput.addEventListener('input', () => bmiResult.classList.add('hidden'));
+            
+            // -------------------- DUE DATE CALCULATOR --------------------
+            const calcDueBtn = document.getElementById('calcDueBtn');
+            const lmpInput = document.getElementById('lmpDate');
+            const dueResult = document.getElementById('dueResult');
+            
+            function calculateDueDate() {
+                const lmpValue = lmpInput.value;
+                if (!lmpValue) {
+                    alert('الرجاء إدخال تاريخ أول يوم من آخر دورة');
+                    return;
+                }
+                
+                const lmpDate = new Date(lmpValue);
+                const today = new Date();
+                today.setHours(0,0,0,0);
+                
+                if (lmpDate > today) {
+                    alert('تاريخ آخر دورة لا يمكن أن يكون في المستقبل');
+                    return;
+                }
+                
+                // Add 280 days (40 weeks)
+                const dueDate = new Date(lmpDate);
+                dueDate.setDate(lmpDate.getDate() + 280);
+                
+                // Format date in Arabic
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = dueDate.toLocaleDateString('ar-YE', options);
+                
+                dueResult.className = "block mt-4 p-3 rounded-xl text-center bg-pink-50 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 transition-all duration-500";
+                dueResult.innerHTML = `
+                    <p class="font-black text-sm">الموعد المتوقع: ${formattedDate}</p>
                     <p class="text-[9px] mt-1 italic">نصيحة: ابدئي بتناول حمض الفوليك وراجعي الدكتورة مروى دورياً.</p>
                 `;
             }
-        }
+            
+            calcDueBtn.addEventListener('click', calculateDueDate);
+            lmpInput.addEventListener('input', () => dueResult.classList.add('hidden'));
+            
+            // -------------------- WHATSAPP BOOKING --------------------
+            const bookingForm = document.getElementById('bookingForm');
+            const submitBtn = document.getElementById('bookingSubmitBtn');
+            const hospitalNumber = "967782629622"; // Include country code
+            
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('patientName').value.trim();
+                const clinic = document.getElementById('clinicSelect').value;
+                const phone = document.getElementById('patientPhone').value.trim();
+                
+                // Basic validation (already handled by HTML but double-check)
+                if (!name || !clinic || !phone) {
+                    alert('يرجى ملء جميع الحقول');
+                    return;
+                }
+                
+                // Disable button and show loading
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<span>جاري التحويل...</span><span class="spinner"></span>`;
+                
+                const message = `*طلب حجز موعد جديد*%0A` +
+                                `--------------------------%0A` +
+                                `*اسم المريض:* ${encodeURIComponent(name)}%0A` +
+                                `*العيادة:* ${encodeURIComponent(clinic)}%0A` +
+                                `*رقم التواصل:* ${encodeURIComponent(phone)}%0A` +
+                                `--------------------------%0A` +
+                                `تم الإرسال عبر الموقع الإلكتروني للمستشفى.`;
+                
+                const whatsappUrl = `https://wa.me/${hospitalNumber}?text=${message}`;
+                
+                // Open in new tab with noopener for security
+                window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+                
+                // Re-enable button after a short delay (to prevent spam)
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }, 3000);
+            });
+            
+            // -------------------- ADDITIONAL POLISH --------------------
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === "#") return;
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            // Tooltips are handled via CSS, no extra JS needed
+        })();
     </script>
 </body>
-</html>
+                            </html>
